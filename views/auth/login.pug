@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+	span 
+		=message
+	form(method="POST")
+		input(name="username" placeholder="username")
+		input(name="password" placeholder="password" type="password")
+		button Login
