@@ -3,3 +3,17 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  .lists
+    h3 Lists
+    a(href="lists/new") Add
+    ul
+      li Homework
+      li Work 
+
+  .tasks
+    h3 Tasks
+    a(href="tasks/new") Add
+    ul
+      li Task 1
+      li Task 2

@@ -1,8 +1,10 @@
 extends ../layout
 
 block content
-	span 
-		=message
+
+	-if(messages.length)
+		span.error #{messages}
+
 	form(method="POST")
 		input(name="username" placeholder="username")
 		input(name="password" placeholder="password" type="password")

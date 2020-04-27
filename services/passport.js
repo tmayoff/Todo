@@ -8,10 +8,14 @@ passport.use(new LocalStrategy((username, password, done) => {
 			username: username
 		}
 	}).then((user) => {
+		if (!user) {
+			return done(null, false, {message: "Username or password is invalid"});
+		}
+
 		if(User.validatePassword(user, password)) {
 			return done(null, user);
 		} else {
-			return done({message: "Username or password is invalid"}, false);
+			return done(null, false, {message: "Username or password is invalid"});
 		}
 	}).catch (err => {
 		return done(err, null);

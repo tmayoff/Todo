@@ -16,7 +16,9 @@ router.post('/register', (req, res, next) => {
   let user = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
+
   // TODO server side validation
+ 
 
   let pass = User.hashPassword(password);
   User.create({
@@ -31,15 +33,17 @@ router.post('/register', (req, res, next) => {
   })
   .catch(err => {
     return next(err);
-  })
+  });
 });
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login');
+  res.render('auth/login', {messages: req.flash('error')});
 });
 
-router.post('/login', passport.authenticate('local', {successRedirect: '/', failureRedirect: '/users/login', failureFlash: "Invalid username or password", failureFlash: true}), (req, res, next) => {
-  res.redirect('/');
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/', 
+  failureRedirect: '/users/login', 
+  failureFlash: true}),
+  (req, res, next) => {});
 
 module.exports = router;

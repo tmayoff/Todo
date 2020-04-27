@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('./services/passport');
-var flash = require('flash');
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -20,7 +20,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser("THIS_IS_A_SECRET"));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // session
@@ -29,18 +29,19 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use(flash());
 
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log("Hello");
   next(createError(404));
 });
 
