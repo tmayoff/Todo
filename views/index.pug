@@ -1,19 +1,19 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .d-flex.flex-grow-1
+    .lists-container.d-flex.flex-column.bg-light.p-4
+      div.d-flex.justify-content-between
+        h3 Lists
+        a.btn.btn-success(href="/lists/new")
+          i.fas.fa-plus
+      div.pt-4.lists
+        a(href="#").card.card-success
+          h4 Homework
+        div.card
+          h4 Project 1
 
-  .lists
-    h3 Lists
-    a(href="lists/new") Add
-    ul
-      li Homework
-      li Work 
-
-  .tasks
-    h3 Tasks
-    a(href="tasks/new") Add
-    ul
-      li Task 1
-      li Task 2
+    .tasks.flex-grow-1
+      h3 Tasks
+      a(href="tasks/new") Add
+      div
