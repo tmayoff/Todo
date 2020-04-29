@@ -8,10 +8,9 @@ block content
         a.btn.btn-success(href="/lists/new")
           i.fas.fa-plus
       div.pt-4.lists
-        a(href="#").card.card-success
-          h4 Homework
-        div.card
-          h4 Project 1
+        each list in lists
+          a.btn(href="/lists/" + list.name class="btn").card.card-success
+            h4= list.name
 
     .tasks.flex-grow-1
       h3 Tasks

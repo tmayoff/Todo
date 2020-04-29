@@ -5,10 +5,18 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', auth.isAuthenticated, function(req, res, next) {
-  lists = Models.List.findAll({
-
+  console.log(req.user.id);
+  Models.List.findAll({
+    where: {
+      UserId: req.user.id
+    }
+  })
+  .then(lists => {
+    res.render('index', { title: 'Express', lists });
+  })
+  .catch(err => {
+    return next(err);
   });
-  res.render('index', { title: 'Express' });
 });
 
 module.exports = router;

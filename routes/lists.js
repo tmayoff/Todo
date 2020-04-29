@@ -15,7 +15,8 @@ router.get('/new', auth.isAuthenticated, (req, res, next) => {
 router.post('/new', auth.isAuthenticated, (req, res, next) => {
 	Models.List.create({
 		name: req.body.name,
-		color: req.body.color
+		color: req.body.color,
+		UserId: req.user.id
 	}).then(() => {
 		res.redirect('/');
 	}).catch(err => {
