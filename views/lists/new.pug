@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+	div.d-flex.flex-grow-1.justify-content-center.align-items-center
+		form(method="POST")
+			.form-row
+				input.form-control(placeholder="Title" autocomplete="off")
+			.form-row
+				select.form-control
+					option.select-green Green
+					option Blue
+					option Yellow
+					option Red
+
+			.form-row.justify-content-center
+				button.btn.btn-success(type="submit") Add new list

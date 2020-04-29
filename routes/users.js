@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('../services/passport');
-var User = require('../models/user');
+var Models = require('../models/models');
 var router = express.Router();
 
 /* GET users listing. */
@@ -18,10 +18,9 @@ router.post('/register', (req, res, next) => {
   let password = req.body.password;
 
   // TODO server side validation
- 
 
-  let pass = User.hashPassword(password);
-  User.create({
+  let pass = Models.hashPassword(password);
+  Models.User.create({
     username: user,
     email,
     hash: pass.hash,
@@ -29,7 +28,7 @@ router.post('/register', (req, res, next) => {
     iterations: pass.iterations
   })
   .then(() => {
-    res.redirect('/auth/login');
+    res.redirect('/users/login');
   })
   .catch(err => {
     return next(err);

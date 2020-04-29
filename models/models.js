@@ -1,7 +1,25 @@
 const { Sequelize, Model, Datatypes }  = require('sequelize');
-const crypto = require('crypto');
+var crypto = require('crypto');
 var sequelize = require('../services/sequelize');
 
+// ---- List ----- //
+class List extends Model {}
+List.init({
+	id: {
+		type: Sequelize.UUID,
+		defaultValue: Sequelize.UUIDV4,
+		primaryKey: true
+	},
+
+	name: Sequelize.STRING,
+	color: Sequelize.STRING
+}, {
+	sequelize,
+	modelName: "List"
+});
+
+
+// ---- Users ----- //
 class User extends Model {}
 User.init({
 	id: {
@@ -16,8 +34,8 @@ User.init({
 	salt: Sequelize.STRING(512),
 	iterations: Sequelize.INTEGER
 },{
-	sequelize, 
-	modelName: 'User'
+	sequelize,
+	modelName: "User"
 });
 
 function hashPassword (password) {
@@ -42,8 +60,12 @@ function validatePassword(user, password) {
 	return user.hash == hash;
 }
 
-sequelize.sync({alter:true});
+User.hasMany(List);
+List.belongsTo(User);
 
-module.exports = User;
+sequelize.sync({ alter: true });
+
+module.exports.List = List;
+module.exports.User = User;
 module.exports.hashPassword = hashPassword;
 module.exports.validatePassword = validatePassword;

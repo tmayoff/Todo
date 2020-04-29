@@ -9,76 +9,29 @@ $theme-colors: (
 	success: #27AE60
 );
 
+$custom-colors: (
+	blue: #2F80ED,
+	green: #27AE60,
+	red: #EB5757,
+	orange: #F2994A,
+	yellow: #F2C94C,
+	purple: #F2F2F2
+);
+
 @import "node_modules/bootstrap/scss/bootstrap";
 
-// Cards
-.card {
-	text-decoration: none;
+// Color select
 
-	margin-top: 2rem;
-	padding: 0.5rem;
-	border: none;
-	box-shadow: 6px 6px 8px #CACACA,
-				-6px -6px 8px #FFFFFF;
+// @each $color, $value in $custom-colors {
+// 	.select-#{$color} {
+// 		background-color: $color;
+// 		color: theme-color('light');
+// 		box-shadow: 16px 4px 4px;
+// 	}
 
-	transition: all 0.1s;
-	color: theme-color('dark');
-}
-
-.card:hover {
-	color: inherit;
-	text-decoration: none;
-}
-
-@each $color, $value in $theme-colors {
-	.card-#{$color} {
-		border: none;
-		color: theme-color('light');
-		background: linear-gradient(145deg, darken($value, 5%), lighten($value, 40%));
-	}
-
-	.card-#{$color}-active {
-		border: none;
-		color: theme-color('light');
-		background: linear-gradient(145deg, darken($value, 5%), lighten($value, 40%));
-		box-shadow: inset 6px 6px 16px darken($value, 5%),
-					inset -6px -6px 16px lighten($value, 40%);
-	}
-}
-
-
-// Buttons
-.btn {
-	box-shadow: 6px 6px 8px #CACACA,
-				-6px -6px 8px #FFFFFF;
-
-	transition: all 0.1s;
-	color: theme-color('dark');
-}
-
-.btn:hover {
-	box-shadow: inset 6px 6px 16px #CACACA,
-				inset -6px -6px 16px #FFFFFF;
-}
-
-@each $color, $value in $theme-colors {
-	.btn-#{$color} {
-		border: none;
-		color: theme-color('light');
-		background: linear-gradient(145deg, darken($value, 10%), lighten($value, 20%));
-	}
-
-	.btn-#{$color}:hover {
-		background: none;
-		box-shadow: none;
-		border: none;
-		color: darken(theme-color('light'), 10%);
-		background: linear-gradient(145deg, darken($value, 10%), darken($value, 10%));
-	}
-
-	.btn-#{$color}:active {
-		border: none;
-		color: darken(theme-color('light'), 20%);
-		background: linear-gradient(145deg, darken($value, 20%), darken($value, 20%));
-	}
-  }
+// 	.select-#{$color}:hover {
+// 		background-color: darken($color, 10%);
+// 		color: theme-color('light');
+// 		border: 5px solid black;
+// 	}
+// }
