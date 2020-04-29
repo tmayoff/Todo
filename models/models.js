@@ -2,6 +2,21 @@ const { Sequelize, Model, Datatypes }  = require('sequelize');
 var crypto = require('crypto');
 var sequelize = require('../services/sequelize');
 
+// ---- Task ----- //
+class Task extends Model {}
+Task.init({
+	id: {
+		type: Sequelize.UUID,
+		defaultValue: Sequelize.UUIDV4,
+		primaryKey: true
+	}, 
+	name: Sequelize.STRING,
+	
+}, {
+	sequelize,
+	modelName: "Task"
+});
+
 // ---- List ----- //
 class List extends Model {}
 List.init({
@@ -62,10 +77,13 @@ function validatePassword(user, password) {
 
 User.hasMany(List);
 List.belongsTo(User);
+List.hasMany(Task);
+Task.belongsTo(List);
 
-sequelize.sync({ alter: true });
+sequelize.sync();
 
 module.exports.List = List;
 module.exports.User = User;
+module.exports.Task = Task;
 module.exports.hashPassword = hashPassword;
 module.exports.validatePassword = validatePassword;

@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+	.d-block.container.w-auto.m-auto
+		.card.shadow
+			form.card-body(method="POST")
+				input(type="hidden" name="list" value=listId) 
+
+				h1.card-title New Todo
+				.form-row
+					.form-group
+						label(for="titleInput") Title
+						input.form-control#titleInput(name="name")
+				.form-row
+					.form-group
+						button.btn.btn-success Add

@@ -5,7 +5,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', auth.isAuthenticated, function(req, res, next) {
-  console.log(req.user.id);
   Models.List.findAll({
     where: {
       UserId: req.user.id

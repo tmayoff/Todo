@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   .d-flex.flex-grow-1
@@ -12,5 +12,15 @@ block content
           a.btn(href="/lists/" + list.name class="btn").card.card-success
             h4= list.name
 
-    .tasks.flex-grow-1
-      p Select a list from the left panel
+    .tasks.flex-grow-1.p-2
+      h3 Tasks
+      table.table.table-light.table-hover
+        thead
+          tr 
+            th Name
+            th
+              a.btn.btn-primary(href="/lists/" + list + "/new") Add
+        tbody
+          each task in tasks
+            tr
+              td(colspan="2")= task.name
