@@ -1,6 +1,8 @@
 extends ../layout
 
 block content
+  script(src="/scripts/list.js")
+
   .d-flex.flex-grow-1
     .lists-container.d-flex.flex-column.bg-light.p-4
       div.d-flex.justify-content-between
@@ -12,15 +14,36 @@ block content
           a.btn(href="/lists/" + list.name class="btn").card.card-success.mb-2
             h4= list.name
 
-    .tasks.flex-grow-1.p-2
-      h3 Tasks
-      table.table.table-light.table-hover
+    .tasks.flex-grow-1.p-5
+      
+      .d-flex.justify-content-between.mb-2
+        h3 Tasks
+        a.btn.btn-primary(href="/lists/" + list + "/new") Add
+      
+      table.table.table-hover(style="table-layout: auto;")
         thead
           tr 
             th Name
-            th
-              a.btn.btn-primary(href="/lists/" + list + "/new") Add
+            th.fit
+            th Complete
         tbody
           each task in tasks
-            tr
-              td(colspan="2")= task.name
+            if !task.complete
+              tr
+                td(colspan="2")= task.name
+                td.fit.text-center
+                  input.complete-checkbox(type="checkbox" data-task-id=task.id checked="false")
+
+      table.table.table-hover(style="table-layout: auto;")
+        thead
+          tr 
+            th Name
+            th.fit
+            th Complete
+        tbody
+          each task in tasks
+            if task.complete
+              tr
+                td(colspan="2")= task.name
+                td.fit.text-center
+                  input.complete-checkbox(type="checkbox" data-task-id=task.id checked="true")

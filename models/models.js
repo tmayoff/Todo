@@ -11,6 +11,7 @@ Task.init({
 		primaryKey: true
 	}, 
 	name: Sequelize.STRING,
+	complete: Sequelize.BOOLEAN
 	
 }, {
 	sequelize,
@@ -80,7 +81,7 @@ List.belongsTo(User);
 List.hasMany(Task);
 Task.belongsTo(List);
 
-sequelize.sync();
+sequelize.sync({ alter:true });
 
 module.exports.List = List;
 module.exports.User = User;

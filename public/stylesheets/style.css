@@ -10,3 +10,9 @@ a {
 .lists-container {
   width: 20%;
 }
+
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}

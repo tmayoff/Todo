@@ -12,6 +12,7 @@ var sass = require('node-sass');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var listsRouter = require('./routes/lists');
+var taskRouter = require('./routes/task');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser("THIS_IS_A_SECRET"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 
 // session
 app.use(session({
@@ -47,6 +49,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/lists', listsRouter);
+app.use('/task', taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
