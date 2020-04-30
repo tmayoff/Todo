@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/register', (req, res, next) => {
-  res.render('auth/register');
+  res.render('auth/register', {messages: req.flash('error')});
 });
 
 router.post('/register', (req, res, next) => {

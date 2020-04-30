@@ -37,11 +37,9 @@ router.get('/:list', auth.isAuthenticated, (req, res, next) => {
 
 	Promise.all([listsPromise, listPromise])
 	.then((results) => {
-		console.log(results);
-
 		res.render('lists/index', {list: req.params.list, lists: results[0], tasks: results[1].Tasks });
 	}).catch(err => {
-		console.error (err);
+		return next(err);
 	});
 
 });
@@ -69,6 +67,5 @@ router.post('/:list/new', auth.isAuthenticated, (req, res, next) => {
 		return next(err);
 	})
 });
-
 
 module.exports = router;

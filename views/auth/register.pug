@@ -1,10 +1,37 @@
 extends ../layout
 
 block content
-	form(method="POST")
-		input(name="username" placeholder="username")
-		input(name="email" placeholder="Email")
-		input(name="password" placeholder="Password")
-		input(name="conf-password" placeholder="Confirm password")
-		button Submit
-		
+
+	.container.card.m-auto
+		form.card-body.needs-validation(method="POST")
+			.row
+				h2.card-title Register
+
+			.form-group.row
+				-if(messages.length)
+					span.text-danger.error #{messages}
+
+			.form-group.row
+				label.col-sm-2.col-form-label(for="user-input") Username
+				.col-sm-10
+					input.form-control#user-input(name="username" placeholder="Username" autocomplete="off" required)
+					.valid-feedback Looks Good
+				
+			.form-group.row
+				label.col-sm-2.col-form-label(for="user-input") Email
+				.col-sm-10
+					input.form-control#email-input(name="email" placeholder="Email" autocomplete="off" required)
+
+			.form-group.row
+				label.col-sm-2.col-form-label(for="password-input") Password
+				.col-sm-10
+					input.form-control#password-input(name="password" placeholder="Password" type="password" required)
+			
+			.form-group.row
+				label.col-sm-2.col-form-label(for="password-input") Confirm Password
+				.col-sm-10
+					input.form-control#password-input(name="conf-password" placeholder="Confirm password" required)
+					
+			.form-row.justify-content-center
+				button.btn.btn-primary.mr-2 Register
+				a.btn.btn-info(href="/users/login") Login

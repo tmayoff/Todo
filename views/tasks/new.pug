@@ -1,9 +1,8 @@
 extends ../layout
 
 block content
-	.d-block.container.w-auto.m-auto
-		.card.shadow
-			form.card-body(method="POST")
+	.container.card.shadow.m-auto
+		form.card-body(method="POST")
 				input(type="hidden" name="list" value=listId) 
 
 				h1.card-title New Todo

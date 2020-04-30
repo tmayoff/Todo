@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser("THIS_IS_A_SECRET"));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 // session
 app.use(session({
@@ -49,7 +50,6 @@ app.use('/lists', listsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log("Hello");
   next(createError(404));
 });
 

@@ -1,11 +1,26 @@
 extends ../layout
 
 block content
+	.container.card.m-auto
+		form.card-body(method="POST")
+			.row
+				h2.card-title Login
 
-	-if(messages.length)
-		span.error #{messages}
+			.form-group.row
+				-if(messages.length)
+					span.text-danger.error #{messages}
 
-	form(method="POST")
-		input(name="username" placeholder="username")
-		input(name="password" placeholder="password" type="password")
-		button Login
+			.form-group.row
+				label.col-form-label(for="user-input") Username
+				.col-sm-10
+					input.form-control#user-input(name="username" placeholder="username" autocomplete="off")
+			.form-group.row
+				label.col-form-label(for="password-input") Password
+				.col-sm-10
+					input.form-control#password-input(name="password" placeholder="password" type="password")
+			.form-row.justify-content-center
+				button.btn.btn-primary.mr-2 Login
+				a.btn.btn-info(href="/users/register") Register
+
+			.form-row
+				span Don't trust me with any important passwords
