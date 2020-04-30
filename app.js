@@ -7,7 +7,6 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('./services/passport');
 var flash = require('connect-flash');
-var sass = require('node-sass');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,11 +14,6 @@ var listsRouter = require('./routes/lists');
 var taskRouter = require('./routes/task');
 
 var app = express();
-
-sass.renderSync({
-  file: "./scss/custom.scss",
-  outFile: "./public/stylesheets"
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
