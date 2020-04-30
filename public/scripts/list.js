@@ -1,15 +1,15 @@
 $(document).ready(() => {
 	
-	$('.complete-checkbox').on('change', (event) => {
+	$('.complete-checkbox').on('click', (event) => {
 		let box = $(event.target);
-		console.log('/task/' + box.data('task-id'));
+		console.log(box.hasClass('completed-unchecked'));
 
 		$.ajax({
 			url: '/task/' + box.data('task-id'),
 			contentType: "application/json",
 			type: 'PUT',
 			data: JSON.stringify({
-				complete: box.is(":checked")
+				complete: box.hasClass('completed-unchecked')
 			})
 		}).then(res => {
 			console.log(res);

@@ -11,6 +11,28 @@ a {
   width: 20%;
 }
 
+.completed-unchecked {
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+
+
+  border-radius: 15px;
+  border: 1px var(--primary) solid;
+  background-color: transparent;
+}
+
+.completed-checked {
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+
+
+  border-radius: 15px;
+  border: 1px var(--primary) solid;
+  background-color: transparent;
+}
+
 .table td.fit, 
 .table th.fit {
     white-space: nowrap;

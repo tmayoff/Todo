@@ -5,7 +5,9 @@ var Models = require('../models/models');
 var router = express.Router();
 
 router.put('/:id', (req, res, next) => {
-	Models.Task.update(req.body, {
+	Models.Task.update({
+		complete: req.body.complete
+	}, {
 		where: {
 			id: req.params.id
 		}
