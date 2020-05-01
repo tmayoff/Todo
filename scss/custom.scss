@@ -20,7 +20,24 @@ $custom-colors: (
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
+// Colors
+@each $color, $value in $custom-colors {
+	.bg-#{$color} {
+		background-color: $value;
+		color: theme-color(light);
+	}
+}
+
+.shadow-hover {
+	transition: box-shadow 0.3s;
+}
+.shadow-hover:hover {
+	box-shadow: 0px 0px 5px #adadad;
+}
+
+
 // Color select
+
 
 // @each $color, $value in $custom-colors {
 // 	.select-#{$color} {

@@ -11,8 +11,8 @@ block content
           i.fas.fa-plus
       div.pt-4.lists
         each list in lists
-          a.btn(href="/lists/" + list.name class="btn").card.card-success.mb-2
-            h4= list.name
+          a.btn(href="/lists/" + list.name class='bg-' + list.color ).card.card-success.shadow-hover.mb-2
+            span(style="font-size: 1.5rem;")= list.name
 
     .tasks.flex-grow-1.p-5
       
