@@ -4,15 +4,6 @@ block content
   script(src="/scripts/list.js")
 
   .d-flex.flex-grow-1
-    .lists-container.d-flex.flex-column.bg-light.p-4
-      div.d-flex.justify-content-between
-        h3 Lists
-        a.btn.btn-success(href="/lists/new")
-          i.fas.fa-plus
-      div.pt-4.lists
-        each list in lists
-          a.btn(href="/lists/" + list.name class="btn").card.card-success.mb-2
-            h4= list.name
 
     .tasks.flex-grow-1.p-5
       
@@ -23,28 +14,34 @@ block content
       table.table.table-hover(style="table-layout: auto;")
         thead
           tr 
-            th Name
-            th.fit
-            th Complete
+            th In Progress
+            th
+            th
         tbody
           each task in tasks
             if !task.complete
               tr
-                td(colspan="2")= task.name
+                td(colspan="2")
+                  .btn.btn-danger.mr-3.delete-task(data-task-id=task.id)
+                    i.p-0.fas.fa-times
+                  = task.name
                 td.fit.text-center
                   button.completed-unchecked.complete-checkbox(type="checkbox" data-task-id=task.id checked="false")
 
       table.table.table-hover(style="table-layout: auto;")
         thead
           tr 
-            th Name
-            th.fit
-            th Complete
+            th Completed
+            th 
+            th 
         tbody
           each task in tasks
             if task.complete
               tr
-                td(colspan="2")= task.name
+                td(colspan="2")
+                  .btn.btn-danger.mr-3.delete-task(data-task-id=task.id)
+                    i.p-0.fas.fa-times
+                  = task.name
                 td.fit.text-center
                   button.completed-checked.complete-checkbox(type="checkbox" data-task-id=task.id checked="true") 
                     i.fas.fa-check

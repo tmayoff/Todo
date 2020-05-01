@@ -21,4 +21,23 @@ router.put('/:id', (req, res, next) => {
 	});
 });
 
+router.delete('/:id', (req, res, next) => {
+	if (!req.params.id) {
+		return res.send(400);
+	}
+
+	Models.Task.destroy({
+		where: {
+			id: req.params.id
+		}
+	}).then(() => {
+		res.send(200);
+	}).catch(err => {
+		res.send({
+			code: 400,
+			msg: err
+		});
+	});
+});
+
 module.exports = router;
