@@ -1,18 +1,23 @@
 $(document).ready(() => {
 	
 	$('.complete-checkbox').on('click', (event) => {
-		let box = $(event.target);
-		console.log(box.hasClass('completed-unchecked'));
+		let box = $(event.currentTarget);
+		let taskId = box.data('taskId'); 
+		let completed = box.hasClass('completed-unchecked');
 
 		$.ajax({
-			url: '/task/' + box.data('task-id'),
+			url: '/task/' + taskId,
 			contentType: "application/json",
 			type: 'PUT',
 			data: JSON.stringify({
-				complete: box.hasClass('completed-unchecked')
+				complete: completed
 			})
 		}).then(res => {
-			console.log(res);
+			if (res != "OK") {
+				console.log(res);
+				return;
+			}
+			
 			location.reload();
 		}).catch(err => {
 			console.error(err);

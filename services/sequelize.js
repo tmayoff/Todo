@@ -12,39 +12,40 @@ const sequelize = new Sequelize({
 	logging: false
 });
 
-let sshServer = tunnel({
-	username: process.env.SSH_USER,
-	password: process.env.SSH_PASS,
-	host: process.env.SSH_HOST,
-	port: process.env.SSH_PORT,
-	
-	localPort:3306,
+if (process.env.SSH_HOST) {
+	let sshServer = tunnel({
+		username: process.env.SSH_USER,
+		password: process.env.SSH_PASS,
+		host: process.env.SSH_HOST,
+		port: process.env.SSH_PORT,
+		
+		localPort:3306,
 
-	dstHost: "127.0.0.1",
-	dstPort: 3306,
-}, (err, srv) => {
-	if (err) {
-		return console.error(err);
-	}
+		dstHost: "127.0.0.1",
+		dstPort: 3306,
+	}, (err, srv) => {
+		if (err) {
+			return console.error(err);
+		}
 
+		sequelize.authenticate()
+		.then(() => {
+			console.log("Authenticated");
+		}).catch(err => {
+			console.error(err);
+		});
+	});
+
+	sshServer.on('error', (err) => {
+		console.error(err)
+	});
+} else {
 	sequelize.authenticate()
 	.then(() => {
 		console.log("Authenticated");
 	}).catch(err => {
 		console.error(err);
 	});
-});
-
-sshServer.on('error', (err) => {
-	console.error(err)
-});
-
-
-sequelize.authenticate()
-.then(() => {
-	console.log("Authenticated");
-}).catch(err => {
-	console.error(err);
-})
+}
 
 module.exports = sequelize;
