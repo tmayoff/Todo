@@ -5,6 +5,9 @@ var Models = require('../models/models');
 var router = express.Router();
 
 router.put('/:id', (req, res, next) => {
+	if(!req.params.id) {
+		return res.send(400);
+	}
 	Models.Task.update({
 		complete: req.body.complete
 	}, {
