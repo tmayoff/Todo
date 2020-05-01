@@ -7,6 +7,81 @@ a {
   color: #00B7FF;
 }
 
+main {
+  align-items: stretch;
+}
+#sidebar {
+  min-width: 300px;
+  max-width: 300px;
+  left: 0;
+
+  transition: all 0.3s;
+}
+
+#dismiss {
+  display: none;
+}
+
+#sidebarCollapse {
+  display: none;
+  font-size: 1.5rem;
+}
+
+.overlay {
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  #sidebarCollapse {
+    display: block;
+  }
+
+  #sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    z-index: 9999;
+  }
+
+  #sidebar.active {
+    left: 0;
+  }
+  
+  #dismiss {
+    display: block;
+    /* width: 35px;
+    height: 35px; */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+  
+    width: 100vw;
+    height: 100vh;
+  
+    background: rgba(0, 0, 0, 0.7);
+  
+    z-index: 9998;
+    opacity: 0;
+  
+    transition: all 0.5s;
+  }
+}
+
+
+
+
+
 .lists-container {
   width: 20%;
 }
