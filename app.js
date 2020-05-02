@@ -7,7 +7,12 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('./services/passport');
 var flash = require('connect-flash');
+var redis = require('redis');
 
+let RedisStore = require('connect-redis')(session);
+let redisClient = redis.createClient();
+
+// Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var listsRouter = require('./routes/lists');
@@ -31,7 +36,8 @@ app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/jquery
 app.use(session({
   secret: "THIS_IS_A_SECRET",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new RedisStore({client, redisClient})
 }));
 app.use(flash());
 
