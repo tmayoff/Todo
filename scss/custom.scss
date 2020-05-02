@@ -25,6 +25,12 @@ $custom-colors: (
 	.bg-#{$color} {
 		background-color: $value;
 		color: theme-color(light);
+		transition: background-color 0.3s;
+	}
+
+	.bg-#{$color}:hover {
+		background-color: darken($value, 5%);
+		transition: background-color 0.3s;
 	}
 }
 

@@ -48,7 +48,11 @@ User.init({
 	verified: Sequelize.BOOLEAN,
 	hash: Sequelize.STRING(512),
 	salt: Sequelize.STRING(512),
-	iterations: Sequelize.INTEGER
+	iterations: Sequelize.INTEGER,
+	valid: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false
+	}
 },{
 	sequelize,
 	modelName: "User"
@@ -79,7 +83,9 @@ function validatePassword(user, password) {
 User.hasMany(List);
 List.belongsTo(User);
 List.hasMany(Task);
-Task.belongsTo(List);
+Task.belongsTo(List, {
+	onDelete: 'CASCADE'
+});
 
 sequelize.sync({ alter:true });
 
