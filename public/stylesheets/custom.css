@@ -7152,27 +7152,57 @@ a.text-dark:hover, a.text-dark:focus {
 
 .bg-blue {
   background-color: #2F80ED;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-blue:hover {
+  background-color: #1872eb;
+  transition: background-color 0.3s; }
 
 .bg-green {
   background-color: #27AE60;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-green:hover {
+  background-color: #229955;
+  transition: background-color 0.3s; }
 
 .bg-red {
   background-color: #EB5757;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-red:hover {
+  background-color: #e84040;
+  transition: background-color 0.3s; }
 
 .bg-orange {
   background-color: #F2994A;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-orange:hover {
+  background-color: #f08c32;
+  transition: background-color 0.3s; }
 
 .bg-yellow {
   background-color: #F2C94C;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-yellow:hover {
+  background-color: #f0c234;
+  transition: background-color 0.3s; }
 
 .bg-purple {
   background-color: #F2F2F2;
-  color: #F2F2F2; }
+  color: #F2F2F2;
+  transition: background-color 0.3s; }
+
+.bg-purple:hover {
+  background-color: #e5e5e5;
+  transition: background-color 0.3s; }
 
 .shadow-hover {
   transition: box-shadow 0.3s; }

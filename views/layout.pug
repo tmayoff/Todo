@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= title
+    title Todo
     
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
@@ -22,22 +22,30 @@ html
 
   body.d-flex.flex-column
     header
-      nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.shadow
         .d-flex.justify-content-center
-            if lists
-              #sidebarCollapse.align-self-center.text-light
-                i.fas.fa-align-justify
-            h3.m-0.ml-3.text-light Todo
+          if user
+            #sidebarCollapse.align-self-center.text-light
+              i.fas.fa-align-justify
+          a.navbar-brand.h3.m-0.ml-3(href="/") Todo
     
     main.d-flex.flex-grow-1.w-100
-      if lists
-        #sidebar.bg-light.p-1
+      if user
+        #sidebar.bg-light.p-2
           .btn.btn-outline-info#dismiss
             i.fas.fa-arrow-left
-          h1.sidebar-header Lists
-          each list in lists
-            a.btn(href="/lists/" + list.name class='bg-' + list.color).card.card-success.mb-2.shadow-hover
-              span(style="font-size: 1.5rem;")= list.name   
+          div.d-flex.flex-column.mb-3
+            h1.sidebar-header Lists
+            a.align-self-center.btn.btn-success(href="/lists/new")
+              i.fas.fa-plus
+          if lists
+            each list in lists
+              .d-flex.justify-content-between.list.mb-2.shadow-hover(data-link="/lists/" + list.name class='bg-' + list.color)= list.name
+                i.fas.fa-ellipsis-h.align-self-center.list-menu(id=list.id data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                .dropdown-menu(aria-labelledby="listId:"+ list.id)
+                  a.dropdown-item(href="/lists/edit/" + list.id) Edit
+                  .dropdown-item.delete-list(data-id=list.id) Delete
       .content.flex-grow-1.pt-5
         block content
-    .overlay
+    if user
+      .overlay

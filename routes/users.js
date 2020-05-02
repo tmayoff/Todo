@@ -3,13 +3,10 @@ var passport = require('../services/passport');
 var Models = require('../models/models');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.get('/register', (req, res, next) => {
-  res.render('auth/register', {messages: req.flash('error')});
+  res.render('auth/register', {
+    messages: req.flash('error')
+  });
 });
 
 router.post('/register', (req, res, next) => {
@@ -36,7 +33,10 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
-  res.render('auth/login', {messages: req.flash('error')});
+  res.render('auth/login', {
+    user: req.user,
+    messages: req.flash('error')
+  });
 });
 
 router.post('/login', passport.authenticate('local', {

@@ -10,6 +10,24 @@ a {
 main {
   align-items: stretch;
 }
+
+/* List item */
+.list {
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.list-menu {
+  font-size: 1.25rem;
+}
+
+.list-menu:hover {
+  color: black;
+}
+
+/* Sidebar */
 #sidebar {
   min-width: 300px;
   max-width: 300px;
@@ -76,14 +94,6 @@ main {
   
     transition: all 0.5s;
   }
-}
-
-
-
-
-
-.lists-container {
-  width: 20%;
 }
 
 .completed-unchecked {

@@ -11,7 +11,7 @@ router.get('/', auth.isAuthenticated, function(req, res, next) {
     }
   })
   .then(lists => {
-    res.render('index', { title: 'Express', lists });
+    res.render('index', {user: req.user, title: 'Todo', lists });
   })
   .catch(err => {
     return next(err);

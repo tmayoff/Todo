@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+	.container.card.m-auto.shadow-hover
+		form.card-body(method="POST")
+			input(type="hidden" name="list" value=list.id) 
+
+			h1.card-title New List
+
+			.form-group
+				label Name
+				input.form-control(placeholder="Title" autocomplete="off" name="name" value=list.name)
+
+			.form-group
+				label Color
+				select.form-control(name="color")
+					if list.color == "green"
+						option(value="green" selected) Green
+					else
+						option(value="green") Green
+					if list.color == "blue"
+						option(value="blue" selected) Blue
+					else
+						option(value="blue") Blue
+					if list.color == "yellow"
+						option(value="yellow" selected) Yellow
+					else
+						option(value="yellow") Yellow
+					if list.color == "red"
+						option(value="red" selected) Red
+					else
+						option(value="red") Red
+
+			.form-group.d-flex.justify-content-center
+				button.btn.btn-success Save
