@@ -7,10 +7,8 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('./services/passport');
 var flash = require('connect-flash');
-var redis = require('redis');
-
-let RedisStore = require('connect-redis')(session);
-let redisClient = redis.createClient();
+var sequelize = require('./services/sequelize');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Routes
 var indexRouter = require('./routes/index');
@@ -34,17 +32,18 @@ app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/jquery
 
 // session
 app.use(session({
-  secret: "THIS_IS_A_SECRET",
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
-  store: new RedisStore({client, redisClient})
+  store: new SequelizeStore({
+    db: sequelize
+  })
 }));
 app.use(flash());
 
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
