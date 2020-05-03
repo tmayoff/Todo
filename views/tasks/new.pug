@@ -1,6 +1,8 @@
 extends ../layout
 
 block content
+	script(src="/scripts/task.js")
+
 	.container.card.m-auto.shadow-hover
 		form.card-body(method="POST")
 			input(type="hidden" name="list" value=listId) 
@@ -8,6 +10,17 @@ block content
 			h1.card-title New Todo
 			.form-group
 				label(for="titleInput") Title
-				input.form-control#titleInput(name="name")
+				input.form-control#titleInput(name="name" required)
+			.form-row
+				.form-group.form-check
+					input.form-check-input#reminder(type="checkbox", name="reminder")
+					label.form-check-label(for="reminder") Reminder
+			.form-row
+				.form-group.col-md-6
+					label(for="dateInput") Date
+					input.form-control#dateInput(type="date", name="dueDate", value=getDateInput())
+				.form-group.col-md-6
+					label Time
+					input.form-control#timeInput(type="time", name="dueDate", value=getTimeInput())
 			.form-group
-				button.btn.btn-success Add
+				button.btn-submit.btn.btn-success(type="submit") Add

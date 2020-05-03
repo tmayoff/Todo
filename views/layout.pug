@@ -40,7 +40,7 @@ html
               i.fas.fa-plus
           if lists
             each list in lists
-              .d-flex.justify-content-between.list.mb-2.shadow-hover(data-link="/lists/" + list.name class='bg-' + list.color)= list.name
+              .d-flex.justify-content-between.list.mb-2.shadow-hover(data-link="/lists/" + list.normalized_name class='bg-' + list.color)= list.name
                 i.fas.fa-ellipsis-h.align-self-center.list-menu(id=list.id data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
                 .dropdown-menu(aria-labelledby="listId:"+ list.id)
                   a.dropdown-item(href="/lists/edit/" + list.id) Edit

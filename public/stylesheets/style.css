@@ -11,6 +11,22 @@ main {
   align-items: stretch;
 }
 
+/* Task */
+
+.task-menu {
+  font-size: 1.5rem;
+  color: #cecece;
+
+  transition: all 0.1s;
+}
+.delete-task {
+  cursor: pointer;
+}
+
+.task-menu:hover {
+  color: var(--dark);
+}
+
 /* List item */
 .list {
   padding: 10px;
@@ -122,4 +138,11 @@ main {
 .table th.fit {
     white-space: nowrap;
     width: 1%;
+}
+
+.shadow-hover {
+	transition: box-shadow 0.2s;
+}
+.shadow-hover:hover {
+	box-shadow: 0px 0px 5px #adadad;
 }
