@@ -25,7 +25,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser("THIS_IS_A_SECRET"));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/scripts', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));

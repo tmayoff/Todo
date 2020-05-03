@@ -2,6 +2,35 @@ const { Sequelize, Model, Datatypes }  = require('sequelize');
 var crypto = require('crypto');
 var sequelize = require('../services/sequelize');
 
+var months = ["Jan.", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+var days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat." ]
+
+/**
+ * 
+ * @param {Date} date The date to format
+ * @param {Boolean} useTime add the time to format as well
+ * @param {Boolean} twelveHour Use 12-hour format or not
+ */
+function formateDate(date, useTime, twelveHour) {
+	let dayOfWeek = days[date.getDay()];
+	let dayOfMonth = date.getDate();
+	let month = months[date.getMonth()];
+	let year = date.getFullYear();
+
+	let format = dayOfWeek + "" + month + ", " + dayOfMonth + ", " + year
+	if (useTime) {
+		let hours = date.getHours();
+		if (twelveHour && hours > 12) {
+			hours -= 12;
+		}
+
+		let minutes = ("0" + date.getMinutes()).slice(-2);
+		format += " at " + hours + ":" + minutes;
+	}
+
+	return format
+}
+
 // ---- Task ----- //
 class Task extends Model {}
 Task.init({
@@ -11,6 +40,19 @@ Task.init({
 		primaryKey: true
 	}, 
 	name: Sequelize.STRING,
+	normalized_name: Sequelize.STRING,
+	dueDate: Sequelize.DATE,
+	dueDateFormatted: {
+		type: Sequelize.VIRTUAL,
+		get() {
+			let date = new Date(this.dueDate);
+			let past = date < new Date();
+			return {
+				past, 
+				date: formateDate(date, true, true)
+			};
+		}
+	},
 	complete: Sequelize.BOOLEAN
 	
 }, {
@@ -28,6 +70,7 @@ List.init({
 	},
 
 	name: Sequelize.STRING,
+	normalized_name: Sequelize.STRING,
 	color: Sequelize.STRING
 }, {
 	sequelize,

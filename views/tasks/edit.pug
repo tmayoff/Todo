@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+
+	.container.card.m-auto.shadow-hover
+		form.card-body(method="POST")
+			input(type="hidden" name="list" value=listId) 
+
+			h1.card-title Edit #{task.name}
+			.form-group
+				label(for="titleInput") Title
+				input.form-control#titleInput(name="name", value=task.name)
+			.form-row
+				.form-group.col-md-6
+					label(for="dateInput") Date
+					input.form-control#dateInput(type="date", name="dueDate", value=getDateInput(task.dueDate))
+				.form-group.col-md-6
+					label Time
+					input.form-control#timeInput(type="time", name="dueDate", value=getTimeInput(task.dueDate))
+			.form-group
+				button.btn.btn-success Save

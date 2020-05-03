@@ -1,5 +1,5 @@
 extends ../layout
-
+  
 block content
   script(src="/scripts/list.js")
 
@@ -9,39 +9,58 @@ block content
       
       .d-flex.justify-content-between.mb-2
         h3 Tasks
-        a.btn.btn-primary(href="/lists/" + list + "/new") Add
+        a.btn.btn-primary(href="/task/new" + "?list=" + list.normalized_name) Add
       
       table.table.table-hover(style="table-layout: auto;")
         thead
           tr 
-            th In Progress
             th
+            th In Progress
             th
         tbody
           each task in tasks
             if !task.complete
               tr
-                td(colspan="2")
-                  .btn.btn-danger.mr-3.delete-task(data-task-id=task.id)
-                    i.p-0.fas.fa-times
-                  = task.name
-                td.fit.text-center
-                  button.completed-unchecked.complete-checkbox(type="checkbox" data-task-id=task.id checked="false")
+                td
+                td.shadow-hover
+                  .d-flex.justify-content-between
+                    div.d-flex.flex-column.justify-content-start.align-items-center
+                      h5.m-0.p-0= task.name
+                      if task.dueDate
+                        if task.dueDateFormatted.past
+                          p.text-danger= task.dueDateFormatted.date
+                        else
+                          p.text-muted= task.dueDateFormatted.date
+                    div.d-flex.align-items-center
+                      button.completed-unchecked.complete-checkbox(type="checkbox" data-task-id=task.id checked="false")
+                      i.fas.fa-ellipsis-h.align-self-center.task-menu.ml-2(id=list.id data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                      .dropdown-menu(aria-labelledby="taskId:"+ task.id)
+                        a.dropdown-item(href="/task/edit/" + task.id + "?listId=" + list.id) Edit
+                        .dropdown-item.delete-task(data-task-id=task.id) Delete
+                td
 
       table.table.table-hover(style="table-layout: auto;")
         thead
           tr 
+            th
             th Completed
-            th 
-            th 
+            th
         tbody
           each task in tasks
             if task.complete
               tr
-                td(colspan="2")
-                  .btn.btn-danger.mr-3.delete-task(data-task-id=task.id)
-                    i.p-0.fas.fa-times
-                  = task.name
-                td.fit.text-center
-                  button.completed-checked.complete-checkbox(type="checkbox" data-task-id=task.id checked="true") 
-                    i.fas.fa-check
+                td
+                td.shadow-hover
+                  .d-flex.justify-content-between
+                    div.d-flex.flex-column.justify-content-start.align-items-center
+                      h5.m-0.p-0= task.name
+                      if task.dueDate
+                        p.text-muted= task.dueDateFormatted.date
+                    div.d-flex.align-items-center
+                      button.completed-checked.complete-checkbox(type="checkbox" data-task-id=task.id checked="true") 
+                        i.fas.fa-check
+                      i.fas.fa-ellipsis-h.align-self-center.task-menu.ml-2(id=list.id data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                      .dropdown-menu(aria-labelledby="taskId:"+ task.id)
+                        a.dropdown-item(href="/tasks/edit/" + task.id) Edit
+                        .dropdown-item.delete-task(data-task-id=task.id) Delete
+                td

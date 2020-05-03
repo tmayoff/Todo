@@ -28,6 +28,7 @@ router.get('/new', auth.isAuthenticated, (req, res, next) => {
 router.post('/new', auth.isAuthenticated, (req, res, next) => {
 	Models.List.create({
 		name: req.body.name,
+		normalized_name: req.body.name.toLowerCase().replace(" ", "_"),
 		color: req.body.color.toLowerCase(),
 		UserId: req.user.id
 	}).then(() => {
@@ -74,42 +75,18 @@ router.get('/:list', auth.isAuthenticated, (req, res, next) => {
 	let listPromise = Models.List.findOne({
 		where: {
 			UserId: req.user.id,
-			name: req.params.list
+			normalized_name: req.params.list
 		},
 		include: [Models.Task]
 	});
 
 	Promise.all([listsPromise, listPromise])
 	.then((results) => {
-		res.render('lists/index', {user: req.user, list: req.params.list, lists: results[0], tasks: results[1].Tasks });
+		res.render('lists/index', {user: req.user, list: results[1], lists: results[0], tasks: results[1].Tasks });
 	}).catch(err => {
 		return next(err);
 	});
 
-});
-
-router.get('/:list/new', auth.isAuthenticated, (req, res, next) => {
-	Models.List.findOne({
-		where: {
-			UserId: req.user.id,
-			name: req.params.list
-		}
-	}).then(list => {
-		res.render('tasks/new', {listId: list.id});
-	}).catch(err => {
-		return next(err);
-	});
-});
-
-router.post('/:list/new', auth.isAuthenticated, (req, res, next) => {
-	Models.Task.create({
-		name: req.body.name,
-		ListId: req.body.list
-	}).then(() => {
-		res.redirect('/lists/' + req.params.list);
-	}).catch(err => {
-		return next(err);
-	})
 });
 
 module.exports = router;

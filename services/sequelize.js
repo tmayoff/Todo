@@ -10,6 +10,7 @@ const sequelize = new Sequelize({
 	username: process.env.DB_USER,
 	password: process.env.DB_PASS,
 	logging: false,
+	timezone: "Etc/GMT+4",
 	
 	pool: {
 		max: 5,
