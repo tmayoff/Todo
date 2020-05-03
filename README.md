@@ -2,7 +2,7 @@
 
 This is a simple to-do app.
 
-![badge](https://github.com/tmayoff/Todo/workflows/ftp-deploy.yml/badge.svg)
+![](https://github.com/tmayoff/Todo/workflows/ftp-deploy.yml/badge.svg)
 
 Meant to teach me more about authentication in NodeJs, as well as some simple SASS, and some github actions
 
