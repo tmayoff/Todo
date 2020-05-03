@@ -33,6 +33,7 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
+
   res.render('auth/login', {
     user: req.user,
     messages: req.flash('error')
@@ -43,6 +44,8 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/', 
   failureRedirect: '/users/login', 
   failureFlash: true}),
-  (req, res, next) => {});
+  (req, res, next) => {
+    
+});
 
 module.exports = router;
