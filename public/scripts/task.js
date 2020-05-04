@@ -6,7 +6,7 @@ $(document).ready(() => {
 
 	$('.btn-submit').attr("disabled", $("#titleInput").val() == "");
 
-	$("#titleInput").on('change', e => {
+	$("#titleInput").on('keyup', e => {
 		$('.btn-submit').attr("disabled", $("#titleInput").val() == "");
 	});
 
