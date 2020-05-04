@@ -1,16 +1,23 @@
 extends ../layout
 
 block content
-	div.d-flex.flex-grow-1.justify-content-center.align-items-center
-		form(method="POST")
-			.form-row
-				input.form-control(placeholder="Title" autocomplete="off" name="name")
-			.form-row
-				select.form-control(name="color")
-					option.select-green Green
-					option Blue
-					option Yellow
-					option Red
+	.container.card.m-auto.shadow-hover
+		form.card-body(method="POST")
+			input(type="hidden" name="list" value=list.id) 
 
-			.form-row.justify-content-center
-				button.btn.btn-success(type="submit") Add new list
+			h1.card-title New List
+
+			.form-group
+				label Name
+				input.form-control(placeholder="Title" autocomplete="off" name="name")
+
+			.form-group
+				label Color
+				select.form-control(name="color")
+					option(value="green") Green
+					option(value="blue") Blue
+					option(value="yellow") Yellow
+					option(value="red") Red
+
+			.form-group.d-flex.justify-content-center
+				button.btn.btn-success Save

@@ -49,4 +49,17 @@ $(document).ready(() => {
 		});
 
 	});
+
+	$('#sort').on('change', event => {
+		let sortBy = $(event.currentTarget).val();
+		
+		$.ajax({
+			url: '/lists/' + $("#listId").val(),
+			method: "PUT",
+			data: {sort:sortBy + ",ASC"}
+		})
+		.then(res => {
+			location.reload();
+		}).catch(console.error)
+	});
 });
