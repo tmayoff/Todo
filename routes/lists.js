@@ -1,6 +1,7 @@
 var express = require('express');
 var auth = require('../services/auth');
 var Models = require('../models/models');
+var sequelize = require('../services/sequelize');
 
 var router = express.Router();
 
@@ -72,21 +73,45 @@ router.get('/:list', auth.isAuthenticated, (req, res, next) => {
 		}
 	});
 
+	let taskPromise;
 	let listPromise = Models.List.findOne({
 		where: {
 			UserId: req.user.id,
 			normalized_name: req.params.list
-		},
-		include: [Models.Task]
-	});
+		}
+	})
 
-	Promise.all([listsPromise, listPromise])
+	Promise.all([listsPromise, listPromise, taskPromise])
 	.then((results) => {
-		res.render('lists/index', {user: req.user, list: results[1], lists: results[0], tasks: results[1].Tasks });
+		list = results[1];
+		Models.Task.findAll({
+			where: {
+				listId: list.id,
+			},
+			order: [
+				[list.sort.split(',')[0], list.sort.split(',')[1]]
+			]
+		}).then(tasks => {
+			res.render('lists/index', {user: req.user, list: results[1], lists: results[0], tasks});
+		})
+
 	}).catch(err => {
 		return next(err);
 	});
 
+});
+
+router.put('/:listId', auth.isAuthenticated, (req, res, next) => {
+	Models.List.update(req.body, {
+			where: {
+				id: req.params.listId
+			}
+		})
+	.then(() => {
+		res.send(200);
+	}).catch((err) => {
+		res.send(500);
+	})
 });
 
 module.exports = router;

@@ -71,7 +71,11 @@ List.init({
 
 	name: Sequelize.STRING,
 	normalized_name: Sequelize.STRING,
-	color: Sequelize.STRING
+	color: Sequelize.STRING,
+	sort: {
+		type: Sequelize.STRING,
+		defaultValue: "name,ASC"
+	}
 }, {
 	sequelize,
 	modelName: "List"
